@@ -39,7 +39,7 @@ function Register() {
                 Loading...
               </button>
             ) : (
-              <button className="btn btn-info  border-red-400 btn-block mb-2 font-bold">
+              <button className="btn btn-info  border-red-400 btn-block mb-2 font-bold text-emerald-500">
                 Register
               </button>
             )}

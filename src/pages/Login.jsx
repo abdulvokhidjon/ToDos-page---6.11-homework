@@ -27,7 +27,7 @@ function Login() {
           method="post"
           className="flex flex-col gap-5 w-[340px] shadow-2xl p-7 rounded-xl  bg-[rgba(255,255,255,0.6)]"
         >
-          <h1 className="text-4xl font-semibold text-center">Login</h1>
+          <h1 className="text-4xl font-semibold text-center text-emerald-500">Login</h1>
           <FormInput
             label="Email :"
             type="email"
@@ -81,7 +81,7 @@ function Login() {
             )}
           </div>
           {error && <div className="text-red-500">{error}</div>}
-          <div className="text-center">
+          <div className="text-center text-emerald-500">
             <p className="font-medium text-slate-500">
               If you don't have an account,{" "}
               <Link className="link link-primary" to="/register">
