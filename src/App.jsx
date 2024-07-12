@@ -35,6 +35,7 @@ import { useEffect } from "react";
 //firebase
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
+import {AuthProvider} from "./context/AuthContext";
 
 function App() {
   const { user, dispatch, isAuthReady } = useGlobalContext();

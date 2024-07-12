@@ -1,31 +1,18 @@
-//rrd import
 import { Form, Link, useActionData } from "react-router-dom";
-
-//hook
-
 import { useEffect } from "react";
-
-//components
 import { FormInput } from "../components";
+import { useLogin } from "../hooks/useLogin";
 
-//Action
 export const action = async ({ request }) => {
-  let formData = await request.formData();
-  let email = formData.get("email");
-  let password = formData.get("password");
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
   return { email, password };
 };
 
-//custom hooks
-import { useRegister } from "../hooks/useRegister";
-import { useLogin } from "../hooks/useLogin";
-
 function Login() {
   const userData = useActionData();
-
-  const { isPanding, registerWithGoogle } = useRegister();
-
-  const { isPanding: isPandingLogin, signIn } = useLogin();
+  const { isPending, signIn, signInWithGoogle, error } = useLogin();
 
   useEffect(() => {
     if (userData) {
@@ -65,34 +52,27 @@ function Login() {
             </label>
           </div>
           <div>
-            {isPandingLogin && (
-              <button
-                disabled
-                type="button"
-                className="btn btn-primary btn-block font-bold"
-              >
+            {isPending ? (
+              <button disabled className="btn btn-primary btn-block font-bold">
                 Loading...
               </button>
-            )}
-            {!isPandingLogin && (
+            ) : (
               <button className="btn btn-primary btn-block font-bold">
                 Login
               </button>
             )}
           </div>
           <div>
-            {isPanding && (
+            {isPending ? (
               <button
                 disabled
-                type="button"
                 className="btn bg-green-300 border-red-400 btn-block font-bold"
               >
                 Loading...
               </button>
-            )}
-            {!isPanding && (
+            ) : (
               <button
-                onClick={registerWithGoogle}
+                onClick={signInWithGoogle}
                 type="button"
                 className="btn bg-green-300 border-red-400 btn-block font-bold"
               >
@@ -100,10 +80,10 @@ function Login() {
               </button>
             )}
           </div>
-
+          {error && <div className="text-red-500">{error}</div>}
           <div className="text-center">
             <p className="font-medium text-slate-500">
-              If you don't have account,{" "}
+              If you don't have an account,{" "}
               <Link className="link link-primary" to="/register">
                 Register
               </Link>

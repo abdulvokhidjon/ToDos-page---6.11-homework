@@ -1,33 +1,31 @@
-//react
+// react
 import { useState } from "react";
-//fitebase
+// firebase
 import { auth } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
-//GlobalContext
+// GlobalContext
 import { useGlobalContext } from "./useGlobalContext";
-
-//Toast
+// Toast
 import toast from "react-hot-toast";
 
 export const useLogin = () => {
-  const [isPanding, setIsPanding] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const { dispatch } = useGlobalContext();
 
   const signIn = async (email, password) => {
     try {
-      setIsPanding(true);
+      setIsPending(true);
       const result = await signInWithEmailAndPassword(auth, email, password);
       const user = result.user;
 
       dispatch({ type: "LOG_IN", payload: user });
-      toast.success(`Welcome, ${user.displayName} `);
-      setIsPanding(false);
+      toast.success(`Welcome, ${user.displayName}`);
     } catch (error) {
-      const errorMessage = error.message;
-      toast.error(errorMessage);
-      setIsPanding(false);
+      toast.error(error.message);
+    } finally {
+      setIsPending(false);
     }
   };
-  return { isPanding, signIn };
+
+  return { isPending, signIn };
 };
