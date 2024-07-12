@@ -46,7 +46,7 @@ function Register() {
           </div>
           <div>
             {!isPending && (
-              <button onClick={registerWithGoogle} type="button" className="btn bg-green-300 border-red-400 text-black btn-block font-bold">
+              <button onClick={registerWithGoogle} type="button" className="btn bg-green-300 border-red-400 text-black hover:text-white btn-block font-bold">
                 Google
               </button>
             )}
